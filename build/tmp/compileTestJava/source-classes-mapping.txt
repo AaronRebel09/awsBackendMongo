@@ -1,0 +1,2 @@
+com/sha/awscodedeploydemo/AwsCodeDeployDemoApplicationTests.java
+ com.sha.awscodedeploydemo.AwsCodeDeployDemoApplicationTests
