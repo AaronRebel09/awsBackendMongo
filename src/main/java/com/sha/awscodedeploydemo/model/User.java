@@ -1,6 +1,8 @@
 package com.sha.awscodedeploydemo.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,6 +37,9 @@ public class User {
 
   @DBRef
   private Set<Role> roles = new HashSet<>();
+
+  @DBRef
+  private List<Image> images = new ArrayList<>();
   
   public User(String username, String email, String password) {
     this.username = username;
