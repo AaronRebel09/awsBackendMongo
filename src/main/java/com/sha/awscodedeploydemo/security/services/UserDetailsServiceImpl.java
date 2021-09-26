@@ -1,12 +1,12 @@
 package com.sha.awscodedeploydemo.security.services;
 
 import com.sha.awscodedeploydemo.model.User;
-import com.sha.awscodedeploydemo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import com.sha.awscodedeploydemo.repository.UserRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service

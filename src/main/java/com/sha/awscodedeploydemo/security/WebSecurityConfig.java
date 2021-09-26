@@ -1,8 +1,5 @@
 package com.sha.awscodedeploydemo.security;
 
-import com.sha.awscodedeploydemo.security.jwt.AuthEntryPointJwt;
-import com.sha.awscodedeploydemo.security.jwt.AuthTokenFilter;
-import com.sha.awscodedeploydemo.security.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +13,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
+import com.sha.awscodedeploydemo.security.jwt.AuthEntryPointJwt;
+import com.sha.awscodedeploydemo.security.jwt.AuthTokenFilter;
+import com.sha.awscodedeploydemo.security.services.UserDetailsServiceImpl;
 
 
 @Configuration
@@ -59,9 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
       http.cors().and().csrf().disable()
           .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
           .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-          //.authorizeRequests().antMatchers("/api/auth/**").permitAll()
-              .authorizeRequests().antMatchers("/api/**").permitAll()
-          .antMatchers("/api/**").permitAll()
+          .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+          .antMatchers("/api/test/**").permitAll()
           .anyRequest().authenticated();
 
       http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

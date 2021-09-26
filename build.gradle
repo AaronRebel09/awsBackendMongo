@@ -38,6 +38,11 @@ dependencies {
 	implementation group: 'com.amazonaws', name: 'aws-java-sdk', version: '1.12.72'
 	// https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore
 	implementation group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.14'
+	implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+	implementation 'com.google.code.gson:gson:2.8.5'
+	implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+	implementation 'com.squareup.okhttp3:okhttp:4.7.2'
+	implementation 'com.squareup.okhttp3:logging-interceptor:4.7.2'
 }
 
 test {
