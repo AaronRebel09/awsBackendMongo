@@ -7,6 +7,7 @@ import com.sha.awscodedeploydemo.repository.ImageRepository;
 import com.sha.awscodedeploydemo.repository.TodoRepository;
 import com.sha.awscodedeploydemo.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

@@ -38,8 +38,8 @@ com/sha/awscodedeploydemo/payload/response/JwtResponse.java
  com.sha.awscodedeploydemo.payload.response.JwtResponse
 com/sha/awscodedeploydemo/exception/ErrorMessage.java
  com.sha.awscodedeploydemo.exception.ErrorMessage
-com/sha/awscodedeploydemo/controller/TestController.java
- com.sha.awscodedeploydemo.controller.TestController
+com/sha/awscodedeploydemo/payload/response/MessageResponse.java
+ com.sha.awscodedeploydemo.payload.response.MessageResponse
 com/sha/awscodedeploydemo/repository/RoleRepository.java
  com.sha.awscodedeploydemo.repository.RoleRepository
 com/sha/awscodedeploydemo/model/ERole.java
@@ -62,9 +62,9 @@ com/sha/awscodedeploydemo/payload/request/LoginRequest.java
  com.sha.awscodedeploydemo.payload.request.LoginRequest
 com/sha/awscodedeploydemo/service/TodoService.java
  com.sha.awscodedeploydemo.service.TodoService
-com/sha/awscodedeploydemo/service/TodoServiceImpl.java
- com.sha.awscodedeploydemo.service.TodoServiceImpl
 com/sha/awscodedeploydemo/security/services/UserDetailsImpl.java
  com.sha.awscodedeploydemo.security.services.UserDetailsImpl
-com/sha/awscodedeploydemo/payload/response/MessageResponse.java
- com.sha.awscodedeploydemo.payload.response.MessageResponse
+com/sha/awscodedeploydemo/controller/TestController.java
+ com.sha.awscodedeploydemo.controller.TestController
+com/sha/awscodedeploydemo/service/TodoServiceImpl.java
+ com.sha.awscodedeploydemo.service.TodoServiceImpl
