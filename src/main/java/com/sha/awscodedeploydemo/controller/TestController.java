@@ -1,21 +1,28 @@
 package com.sha.awscodedeploydemo.controller;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.sha.awscodedeploydemo.model.Images;
 import com.sha.awscodedeploydemo.repository.RoleRepository;
+import com.sha.awscodedeploydemo.service.TodoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/test")
 public class TestController {
+
+  @Autowired
+  TodoServiceImpl service;
   
   @Autowired
   private RoleRepository repo;
@@ -49,6 +56,31 @@ public class TestController {
     Map<String, Object> map = new LinkedHashMap<>();
     map.put("roles", repo.findAll());
     return map;
+  }
+
+  @PostMapping(
+          path = "/todo",
+          consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+          produces = MediaType.APPLICATION_JSON_VALUE
+  )
+  public ResponseEntity<Images> saveTodo(@RequestParam("title") String title,
+                                         @RequestParam("description") String description,
+                                         @RequestParam("user") String username,
+                                         @RequestParam("file") MultipartFile[] files) {
+    System.out.println("Files size: "+files.length+" subidos por: "+username);
+    //return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    return new ResponseEntity<>(service.saveTodo(username, title, description, files), HttpStatus.OK);
+  }
+
+  @GetMapping("/getImagesByUser/{username}")
+  public ResponseEntity<List<Images>> getImages(@PathVariable(value="username") String username) {
+    System.out.println("username: "+username);
+    return new ResponseEntity<>(service.getAllTodosByUser(username), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/{id}/image/download", produces = MediaType.IMAGE_PNG_VALUE)
+  public byte[] downloadTodoImage(@PathVariable("id") String id) {
+    return service.downloadTodoImage(id);
   }
   
 }
