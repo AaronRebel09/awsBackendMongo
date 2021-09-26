@@ -1,4 +1,3 @@
-/*
 package com.sha.awscodedeploydemo.service;
 
 import com.amazonaws.AmazonServiceException;
@@ -49,4 +48,3 @@ public class FileStore {
     }
 
 }
-*/

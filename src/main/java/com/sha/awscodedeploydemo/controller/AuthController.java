@@ -3,7 +3,6 @@ package com.sha.awscodedeploydemo.controller;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 
@@ -12,18 +11,10 @@ import com.sha.awscodedeploydemo.model.ERole;
 import com.sha.awscodedeploydemo.model.RefreshToken;
 import com.sha.awscodedeploydemo.model.Role;
 import com.sha.awscodedeploydemo.model.User;
-import com.sha.awscodedeploydemo.payload.request.LoginRequest;
-import com.sha.awscodedeploydemo.payload.request.SignupRequest;
-import com.sha.awscodedeploydemo.payload.request.TokenRefreshRequest;
 import com.sha.awscodedeploydemo.payload.response.JwtResponse;
-import com.sha.awscodedeploydemo.payload.response.MessageResponse;
-import com.sha.awscodedeploydemo.payload.response.TokenRefreshResponse;
-import com.sha.awscodedeploydemo.repository.RoleRepository;
-import com.sha.awscodedeploydemo.repository.UserRepository;
 import com.sha.awscodedeploydemo.security.jwt.JwtUtils;
 import com.sha.awscodedeploydemo.security.services.RefreshTokenService;
 import com.sha.awscodedeploydemo.security.services.UserDetailsImpl;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,7 +27,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.sha.awscodedeploydemo.payload.request.LoginRequest;
+import com.sha.awscodedeploydemo.payload.request.SignupRequest;
+import com.sha.awscodedeploydemo.payload.request.TokenRefreshRequest;
+import com.sha.awscodedeploydemo.payload.response.MessageResponse;
+import com.sha.awscodedeploydemo.payload.response.TokenRefreshResponse;
+import com.sha.awscodedeploydemo.repository.RoleRepository;
+import com.sha.awscodedeploydemo.repository.UserRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -47,7 +44,7 @@ public class AuthController {
   AuthenticationManager authenticationManager;
 
   @Autowired
-   UserRepository userRepository;
+  UserRepository userRepository;
 
   @Autowired
   RoleRepository roleRepository;
@@ -74,8 +71,10 @@ public class AuthController {
       List<String> roles = userDetails.getAuthorities().stream()
               .map(item -> item.getAuthority())
               .collect(Collectors.toList());
-      RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
 
+      refreshTokenService.deleteByUserId(userDetails.getId());
+
+      RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
 
       return ResponseEntity.ok(new JwtResponse(jwt,refreshToken.getToken(),
                                                userDetails.getId(), 

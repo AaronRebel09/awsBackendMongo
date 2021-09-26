@@ -1,11 +1,11 @@
 package com.sha.awscodedeploydemo.controller;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.sha.awscodedeploydemo.model.Images;
-import com.sha.awscodedeploydemo.repository.RoleRepository;
 import com.sha.awscodedeploydemo.service.TodoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import com.sha.awscodedeploydemo.repository.RoleRepository;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -20,9 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/api/test")
 public class TestController {
-
-  @Autowired
-  TodoServiceImpl service;
   
   @Autowired
   private RoleRepository repo;
@@ -58,6 +56,13 @@ public class TestController {
     return map;
   }
 
+  @Autowired
+  TodoServiceImpl service;
+
+  /*@GetMapping
+  public ResponseEntity<List<Images>> getTodos() {
+    return new ResponseEntity<>(service.getAllTodos(), HttpStatus.OK);
+  }*/
 
   @PostMapping(
           path = "/todo",
@@ -68,7 +73,7 @@ public class TestController {
   public ResponseEntity<Images> saveTodo(@RequestParam("title") String title,
                                          @RequestParam("description") String description,
                                          @RequestParam("user") String username,
-                                         @RequestParam("file") MultipartFile[] files) {
+                                         @RequestParam("file") MultipartFile[] files) throws IOException {
     System.out.println("Files size: "+files.length+" subidos por: "+username);
     //return new ResponseEntity<>(HttpStatus.ACCEPTED);
     return new ResponseEntity<>(service.saveTodo(username, title, description, files), HttpStatus.OK);
@@ -85,5 +90,4 @@ public class TestController {
   public byte[] downloadTodoImage(@PathVariable("id") String id) {
     return service.downloadTodoImage(id);
   }
-  
 }

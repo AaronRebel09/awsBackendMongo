@@ -1,4 +1,4 @@
-/*package com.sha.awscodedeploydemo.Config;
+package com.sha.awscodedeploydemo.config;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -20,4 +20,4 @@ public class AmazonConfig {
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
                 .build();
     }
-}*/
+}
