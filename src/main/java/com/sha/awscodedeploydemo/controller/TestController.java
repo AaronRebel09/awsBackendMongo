@@ -58,11 +58,13 @@ public class TestController {
     return map;
   }
 
+
   @PostMapping(
           path = "/todo",
           consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
           produces = MediaType.APPLICATION_JSON_VALUE
   )
+  @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
   public ResponseEntity<Images> saveTodo(@RequestParam("title") String title,
                                          @RequestParam("description") String description,
                                          @RequestParam("user") String username,
@@ -73,6 +75,7 @@ public class TestController {
   }
 
   @GetMapping("/getImagesByUser/{username}")
+  @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
   public ResponseEntity<List<Images>> getImages(@PathVariable(value="username") String username) {
     System.out.println("username: "+username);
     return new ResponseEntity<>(service.getAllTodosByUser(username), HttpStatus.OK);
