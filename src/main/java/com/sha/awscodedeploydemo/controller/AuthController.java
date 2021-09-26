@@ -3,6 +3,7 @@ package com.sha.awscodedeploydemo.controller;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 
@@ -22,6 +23,7 @@ import com.sha.awscodedeploydemo.repository.UserRepository;
 import com.sha.awscodedeploydemo.security.jwt.JwtUtils;
 import com.sha.awscodedeploydemo.security.services.RefreshTokenService;
 import com.sha.awscodedeploydemo.security.services.UserDetailsImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
